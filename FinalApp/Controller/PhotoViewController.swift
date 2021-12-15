@@ -6,4 +6,14 @@
 //
 
 import UIKit
+import SDWebImage
 
+class PhotoViewController : UIViewController {
+    
+    @IBOutlet weak var myImageView: UIImageView!
+    var url = "https://s3.amazonaws.com/7z0.prod.domain.tld/weather.png"
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        myImageView.sd_setImage(with: URL(string: url))
+    }
+}
