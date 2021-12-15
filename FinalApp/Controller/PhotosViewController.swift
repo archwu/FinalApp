@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Alamofire
 
-class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var tblView: UITableView!
     
     var arr = ["photo1"]
@@ -31,4 +32,43 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let destinationVC = segue.destination as! PhotoViewController
         destinationVC.url = "https://s3.amazonaws.com/7z0.prod.domain.tld/weather.png"
     }
+    
+    
+    @IBAction func addPic(_ sender: Any) {
+        let alertController = UIAlertController(title: "Take a Picture", message: "Select Camera or Photo Library", preferredStyle: .alert)
+            
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
+                if UIImagePickerController.isSourceTypeAvailable(.camera){
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                    imagePicker.allowsEditing = false
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+        
+            }
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
+                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                    imagePicker.allowsEditing = false
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+                
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("User selected Cancel")
+        
+            }
+            
+            alertController.addAction(cameraAction)
+            alertController.addAction(photoLibraryAction)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+
+
+            
+        }
 }

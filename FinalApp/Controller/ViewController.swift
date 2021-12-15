@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         guard let pswd = password.text else {
             return
         }
-        getPicURL(uname, pswd)
+        //getPicURL(uname, pswd)
     }
     
     @IBAction func registerButtonPressed(sender: UIButton) {
