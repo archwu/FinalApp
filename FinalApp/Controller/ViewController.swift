@@ -52,7 +52,7 @@ class ViewController: UIViewController {
             print(headers.value(for: "Authorization"))
 
             
-            AF.request(url, headers: headers).responseJSON { response in
+            AF.request(url, parameters: nil, headers: headers).validate().responseJSON { response in
                 if response.error != nil {
                     seal.reject(response.error!)
                 }
