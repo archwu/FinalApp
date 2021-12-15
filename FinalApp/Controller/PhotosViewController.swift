@@ -27,5 +27,8 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PhotoViewController
+        destinationVC.url = "https://s3.amazonaws.com/7z0.prod.domain.tld/weather.png"
+    }
 }
